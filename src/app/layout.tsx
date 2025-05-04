@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
-import "../styles/globals.css";
+import "@/styles/globals.css"
+import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Chess Grandmasters",
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
@@ -18,5 +18,5 @@ export default function RootLayout({
       </head>
       <body>{children}</body>
     </html>
-  );
+  )
 }

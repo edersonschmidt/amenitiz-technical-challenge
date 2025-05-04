@@ -2,16 +2,30 @@ import { getAPIUrl } from "@/utils/getBaseUrl"
 
 interface GMResponse {
   players: string[]
+  total: number
+  page: number
+  limit: number
 }
 
-export async function fetchGrandmasters(): Promise<GMResponse> {
+interface GMProps {
+  page: number
+  limit: number
+}
+
+export async function fetchGrandmasters({
+  page = 1,
+  limit = 20,
+}: GMProps): Promise<GMResponse> {
   const apiUrl = getAPIUrl()
 
-  const res = await fetch(`${apiUrl}/grandmasters`, {
-    next: { revalidate: 60 },
+  const params = new URLSearchParams({
+    page: page.toString(),
+    limit: limit.toString(),
   })
 
-  console.log("Grandmasters response:", res)
+  const res = await fetch(`${apiUrl}/grandmasters?${params.toString()}`, {
+    next: { revalidate: 60 },
+  })
 
   if (!res.ok) {
     throw new Error("Error fetching grandmasters data")
@@ -19,9 +33,13 @@ export async function fetchGrandmasters(): Promise<GMResponse> {
 
   const data = await res.json()
   if (!data || !data.players) {
-    return { players: [] }
+    return { players: [], total: 0, page: 0, limit: 0 }
   }
 
-  const players = data.players.map((player: string) => player)
-  return { players }
+  return {
+    players: data.players,
+    total: data.total,
+    page,
+    limit,
+  }
 }
