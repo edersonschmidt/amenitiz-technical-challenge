@@ -1,2 +1,2 @@
-export * from "./fetchGrandmasters";
-
+export * from "./fetchGrandmasters"
+export * from "./getGrandmaster"

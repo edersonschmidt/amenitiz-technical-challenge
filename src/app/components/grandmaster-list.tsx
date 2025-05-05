@@ -16,12 +16,12 @@ function GrandmasterList({
   selectedPlayer,
 }: GrandmasterListProps) {
   return (
-    <div className="flex flex-col w-full gap-4">
+    <div className="flex flex-col gap-4 w-full">
       <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {players.map((player) => (
           <li
             key={player}
-            className={`p-4 text-lg cursor-pointer transition shadow-sm hover:shadow-md rounded-xl ${
+            className={`rounded-xl p-4 text-lg shadow-sm transition hover:shadow-md cursor-pointer ${
               selectedPlayer === player ? "bg-blue-400" : "bg-white"
             }`}
             onClick={() => onSelectPlayer(player)}
@@ -35,7 +35,7 @@ function GrandmasterList({
           type="button"
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage <= 1}
-          className="p-2 text-gray-800 transition bg-gray-200 rounded-lg cursor-pointer hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="rounded-lg bg-gray-200 p-2 text-gray-800 transition-colors hover:bg-gray-300 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Previous
         </button>
@@ -48,7 +48,7 @@ function GrandmasterList({
           type="button"
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage >= totalPages}
-          className="p-2 text-gray-800 transition bg-gray-200 rounded-lg cursor-pointer cursor-pointerfont-medium hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="rounded-lg bg-gray-200 p-2 text-gray-800 transition-colors hover:bg-gray-300 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Next
         </button>
